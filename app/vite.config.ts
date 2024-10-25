@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/tetrisface/NuttyB-Raptors',
+  base: '/NuttyB-Raptors',
   plugins: [vue()],
   build: {
     outDir: '../docs',
