@@ -20,7 +20,7 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": false,
     "target": "ESNext",
-    "typeRoots": ["./node_modules/@types"]
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   },
   "exclude": ["node_modules"]
 }

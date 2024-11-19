@@ -18,6 +18,7 @@ install:
 	@$(NODE_USE_CMD)
 	@npm install -g bun ts-node
 	@bun install
+	@(cd app && bun install)
 
 b64tolua:
 	@ts-node ./scripts/converter.ts b64tolua
