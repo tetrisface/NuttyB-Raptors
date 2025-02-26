@@ -1,8 +1,9 @@
 --T3 Eco
 local unitDefs = UnitDefs or {}
-local t3Afus = 'lootboxplatinum'
-local t3Conv = 'armdf'
-local energy = {
+local t3AfusName = 'lootboxplatinum'
+local t3ConvName = 'armdf'
+local t3NanoName = 'lootboxnano'
+local t3EnergyDef = {
 	buildpic = 'other/resourcecheat.dds',
 	buildtime = 1000000,
 	energycost = 500000,
@@ -15,7 +16,7 @@ local energy = {
 	reclaimable = true,
 	canmove = false
 }
-local converter = {
+local t3ConverterDef = {
 	activatewhenbuilt = true,
 	buildpic = 'lootboxes/LOOTBOXGOLD.DDS',
 	buildtime = 313000,
@@ -26,9 +27,9 @@ local converter = {
 	metalcost = 8000,
 	objectname = 'Units/CORUWFUS.s3o',
 	script = 'Units/CORUWFUS.cob',
-	selfdestructas = 'fusionExplosionSelfd',
-	translatedHumanName = 'Super Energy Converter'
+	selfdestructas = 'fusionExplosionSelfd'
 }
+local t3NanoDef = {}
 local converterCustomparams = {
 	energyconv_capacity = 5000,
 	energyconv_efficiency = 0.0181,
@@ -79,32 +80,43 @@ local builderNames = {
 	'legacv'
 }
 
-for key, value in pairs(energy) do
-	unitDefs[t3Afus][key] = value
+for key, value in pairs(t3EnergyDef) do
+	unitDefs[t3AfusName][key] = value
 end
 
-unitDefs[t3Afus].customparams.i18n_en_humanname = 'Super Fusion Reactor'
-unitDefs[t3Afus].customparams.i18n_en_tooltip = 'Produces 30000 Energy, Transportable (Very Hazardous)'
-unitDefs[t3Afus].customparams.techlevel = 3
+unitDefs[t3AfusName].customparams.i18n_en_humanname = 'Super Fusion Reactor'
+unitDefs[t3AfusName].customparams.i18n_en_tooltip = 'Produces 30000 Energy, Transportable (Very Hazardous)'
+unitDefs[t3AfusName].customparams.techlevel = 3
 
-for key, value in pairs(converter) do
-	unitDefs[t3Conv][key] = value
+for key, value in pairs(t3ConverterDef) do
+	unitDefs[t3ConvName][key] = value
 end
 
 for key, value in pairs(converterCustomparams) do
-	unitDefs[t3Conv].customparams[key] = value
+	unitDefs[t3ConvName].customparams[key] = value
 end
 
 for key, value in pairs(converterFeaturedefsDead) do
-	unitDefs[t3Conv].featuredefs.dead[key] = value
+	unitDefs[t3ConvName].featuredefs.dead[key] = value
 end
 for key, value in pairs(converterFeaturedefsHeap) do
-	unitDefs[t3Conv].featuredefs.heap[key] = value
+	unitDefs[t3ConvName].featuredefs.heap[key] = value
 end
+
+for key, value in pairs(t3NanoDef) do
+	unitDefs[t3NanoName][key] = value
+end
+
+unitDefs[t3NanoName].customParams.i18n_en_humanname = 'Super Nano'
+unitDefs[t3NanoName].customParams.i18n_en_tooltip = 'Builds a lot'
+unitDefs[t3NanoName].customParams.techlevel = 3
+unitDefs[t3NanoName].customParams.subfolder = 'ArmBuildings/LandUtil'
+unitDefs[t3NanoName].customParams.unitgroup = 'builder'
 
 for i = 1, #builderNames do
 	local builderName = builderNames[i]
 	local nBuildOptions = #unitDefs[builderName].buildoptions
-	unitDefs[builderName].buildoptions[nBuildOptions + 1] = t3Conv
-	unitDefs[builderName].buildoptions[nBuildOptions + 2] = t3Afus
+	unitDefs[builderName].buildoptions[nBuildOptions + 1] = t3ConvName
+	unitDefs[builderName].buildoptions[nBuildOptions + 2] = t3AfusName
+	unitDefs[builderName].buildoptions[nBuildOptions + 3] = t3NanoName
 end
